@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  auto_market_sim:
+    build: .
+    volumes:
+      - ./:/home/
+    ports:
+      - "8888:8888"
