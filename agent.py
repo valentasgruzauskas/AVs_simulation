@@ -73,7 +73,7 @@ class Household_agent(Agent):
             benefit = 1
 
         if self.car_type == "Autonomous":
-            benefit = self.model.AV_benefit
+            benefit = (1 - self.model.AV_benefit)
 
         Accident_prob = self.model.Accident_prob * benefit
         Injury_prob = self.model.Injury_prob * benefit

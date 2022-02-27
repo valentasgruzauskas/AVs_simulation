@@ -21,34 +21,42 @@ from support_functions import (
     get_month,
 )
 
-# #### Single run, many iterations
-# Number_households = 1000
-#
-# fixed_params = {"Number_households": Number_households,
-#                 "early_adaptor_prob": 0.001,
-#                 "stagnator_prob": 0.3,
-#                 "early_adaptor_lower_threshold": 9,
-#                 "early_adaptor_upper_threshold": 3,
-#                 "selected_country": "Germany"
-#                 }
-#
-# variable_parameters = {
-#     "Social_network_size": range(8, 12, 1)}
-
-#### parameter analysis, large space
-
+#### Single run, many iterations
 Number_households = 1000
 
-fixed_params = {"Number_households": Number_households}
+# fixed_params = {"Number_households": Number_households,
+#                 "early_adaptor_prob": 0.001,
+#                 "stagnator_prob": 0.9,
+#                 "early_adaptor_lower_threshold": 9,
+#                 "early_adaptor_upper_threshold": 1,
+#                 "selected_country": "Lithuania"
+#                 }
+
+fixed_params = {"Number_households": Number_households,
+                "early_adaptor_prob": 0.001,
+                "stagnator_prob": 0.3,
+                "early_adaptor_lower_threshold": 7,
+                "early_adaptor_upper_threshold": 1,
+                "selected_country": "Germany"
+                }
 
 variable_parameters = {
-    "Social_network_size": range(8, 12, 1),
-    "early_adaptor_prob": np.arange(0.001, 0.01, 0.002),
-    "stagnator_prob": np.arange(0.1, 1, 0.2),
-    "early_adaptor_lower_threshold": np.arange(0, 10, 1),
-    "early_adaptor_upper_threshold": np.arange(0, 10, 1),
-    "selected_country": ["Lithuania", "Germany"],
-}
+    "Social_network_size": range(8, 10, 1)}
+
+# #### parameter analysis, large space
+#
+# Number_households = 1000
+#
+# fixed_params = {"Number_households": Number_households}
+#
+# variable_parameters = {
+#     "Social_network_size": range(8, 13, 1),
+#     "early_adaptor_prob": np.arange(0.001, 0.01, 0.002),
+#     "stagnator_prob": np.arange(0.1, 1, 0.2),
+#     "early_adaptor_lower_threshold": np.arange(0, 10, 1),
+#     "early_adaptor_upper_threshold": np.arange(0, 10, 1),
+#     "selected_country": ["Lithuania", "Germany"],
+# }
 
 #set iteration number
 iterations = 30

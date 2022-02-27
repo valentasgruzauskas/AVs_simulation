@@ -63,6 +63,14 @@ Mesa server and jupyter notebook are running on the same port
 make sure to restart docker container before running that the port would be opened
 ```
 
+## Alternatively you can create virtual env and install requirements.txt
+
+```
+Create enviroment
+Activate enviroment
+Install packages: pip install -r requirements.txt
+```
+
 # License
 ```
 cc-by-4.0
