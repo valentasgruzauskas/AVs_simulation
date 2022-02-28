@@ -94,9 +94,9 @@ class Household_agent(Agent):
             benefit = 1
 
         if self.car_type == "Autonomous":
-            benefit = self.model.AV_benefit
+            benefit = 1 - self.model.AV_benefit
 
-        offense_prob = self.model.fine_prob * (1 - benefit)
+        offense_prob = self.model.fine_prob * benefit
 
         if random.uniform(0, 1) < offense_prob:
 
@@ -141,6 +141,10 @@ class Household_agent(Agent):
 
             if self.savings > self.monthly_payment:
                 self.loan = self.loan - self.monthly_payment
+                self.savings = self.savings - self.monthly_payment
+
+        # Pay other expenditures
+        self.savings  = self.savings - (self.savings * (1 - 0.15))
 
         return income
 
