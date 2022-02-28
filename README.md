@@ -73,5 +73,5 @@ Install packages: pip install -r requirements.txt
 
 # License
 ```
-cc-by-4.0
+CC BY-NC 3.0
 ```
