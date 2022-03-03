@@ -11,9 +11,9 @@ from support_functions import (
     calculate_car_type,
     calculate_early_adaptors_type,
     calculate_stagnator_type,
-    calculcate_total_CO2,
-    calculcate_total_welfare,
-    calculcate_total_savings,
+    calculcate_mean_CO2,
+    calculcate_mean_welfare,
+    calculcate_mean_savings,
     calculate_productivity_healthy,
     calculate_productivity_accident,
     calculate_productivity_injured,
@@ -32,31 +32,31 @@ Number_households = 1000
 #                 "selected_country": "Lithuania"
 #                 }
 
-fixed_params = {"Number_households": Number_households,
-                "early_adaptor_prob": 0.001,
-                "stagnator_prob": 0.3,
-                "early_adaptor_lower_threshold": 7,
-                "early_adaptor_upper_threshold": 1,
-                "selected_country": "Germany"
-                }
+# fixed_params = {"Number_households": Number_households,
+#                 "early_adaptor_prob": 0.001,
+#                 "stagnator_prob": 0.3,
+#                 "early_adaptor_lower_threshold": 7,
+#                 "early_adaptor_upper_threshold": 1,
+#                 "selected_country": "Germany"
+#                 }
 
-variable_parameters = {
-    "Social_network_size": range(8, 10, 1)}
+# variable_parameters = {
+#     "Social_network_size": range(8, 10, 1)}
 
 # #### parameter analysis, large space
-#
-# Number_households = 1000
-#
-# fixed_params = {"Number_households": Number_households}
-#
-# variable_parameters = {
-#     "Social_network_size": range(8, 13, 1),
-#     "early_adaptor_prob": np.arange(0.001, 0.01, 0.002),
-#     "stagnator_prob": np.arange(0.1, 1, 0.2),
-#     "early_adaptor_lower_threshold": np.arange(0, 10, 1),
-#     "early_adaptor_upper_threshold": np.arange(0, 10, 1),
-#     "selected_country": ["Lithuania", "Germany"],
-# }
+
+Number_households = 1000
+
+fixed_params = {"Number_households": Number_households}
+
+variable_parameters = {
+    "Social_network_size": range(8, 13, 1),
+    "early_adaptor_prob": np.arange(0.001, 0.01, 0.002),
+    "stagnator_prob": np.arange(0.0, 0.5, 0.05),
+    "early_adaptor_lower_threshold": np.arange(1, 5, 1),
+    "early_adaptor_upper_threshold": np.arange(1, 5, 1),
+    "selected_country": ["Lithuania", "Germany"],
+}
 
 #set iteration number
 iterations = 30
@@ -73,9 +73,9 @@ if __name__ == "__main__":
         nr_processes=23,
         model_reporters={
             "Total offenses": calculcate_total_fines_collected,
-            "Total CO2": calculcate_total_CO2,
-            "Total welfare": calculcate_total_welfare,
-            "Total savings": calculcate_total_savings,
+            "Total CO2": calculcate_mean_CO2,
+            "Total welfare": calculcate_mean_welfare,
+            "Total savings": calculcate_mean_savings,
             "Number of autonomous vehicles": calculate_car_type,
             "Number of early adaptors": calculate_early_adaptors_type,
             "Number of stagnators": calculate_stagnator_type,
