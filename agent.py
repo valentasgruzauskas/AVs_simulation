@@ -48,11 +48,9 @@ class Household_agent(Agent):
 
         if random.uniform(0, 1) < self.model.stagnator_prob:
             self.inovator_type = "stagnator"
-
-        if random.uniform(0, 1) < self.model.early_adaptor_prob:
+        elif random.uniform(0, 1) < self.model.early_adaptor_prob:
             self.inovator_type = "early adaptor"
-
-        if (self.inovator_type != 'early adaptor') & (self.inovator_type != 'stagnator'):
+        else:
             self.inovator_type = "normal"
 
     # Based on car type generate CO2 emmision
@@ -90,6 +88,8 @@ class Household_agent(Agent):
 
     def generate_offense(self):
 
+        self.fine_size = 0
+
         if self.car_type == "Traditional":
             benefit = 1
 
@@ -102,18 +102,10 @@ class Household_agent(Agent):
 
             offense_conducted = False
 
-            if self.model.selected_country == "Lithuania":
-                if random.uniform(0, 1) < offense_prob:
-                    offense_conducted = True
+            if random.uniform(0, 1) < offense_prob:
+                offense_conducted = True
 
-                    self.fine_size = self.model.fine_size
-
-            if self.model.selected_country == "Germany":
-                if random.uniform(0, 1) < offense_prob:
-
-                    offense_conducted = True
-
-                    self.fine_size = self.model.fine_size
+                self.fine_size = self.model.fine_size
 
     def update_savings(self):
 
@@ -144,7 +136,8 @@ class Household_agent(Agent):
                 self.savings = self.savings - self.monthly_payment
 
         # Pay other expenditures
-        self.savings  = self.savings - (self.savings * (1 - 0.15))
+        other_expenses = self.income * (0.85 - self.model.Trans_exp) #basad on average saving ratio
+        self.savings = self.savings - other_expenses
 
         return income
 
@@ -157,11 +150,13 @@ class Household_agent(Agent):
 
         total_loss = lost_income + costs_CO2 + self.fine_size
 
-        AV_CO2_benefit = random.uniform(40, 60) / 100
+        AV_CO2_benefit = random.uniform(self.model.AV_CO2_min, self.model.AV_CO2_max) / 100
 
-        possible_gain = self.income + (costs_CO2 * AV_CO2_benefit) + 0
+        possible_gain_co2 = costs_CO2 - (costs_CO2 * AV_CO2_benefit)
 
-        welfare_score = int(possible_gain - total_loss)
+        possible_gain = possible_gain_co2 + lost_income + 0 # Theoretically no fine, thus +0
+
+        welfare_score = int(total_loss - possible_gain)
 
         self.welfare_score = int(self.welfare_score + welfare_score)
 
@@ -172,16 +167,16 @@ class Household_agent(Agent):
         compare_welfare_score = 0
         for agent in self.model.grid.get_cell_list_contents(neighbors_nodes):
             compare_welfare_score = compare_welfare_score + agent.welfare_score
-            compare_welfare_score = int(compare_welfare_score / len(neighbors_nodes))
+        compare_welfare_score = int(compare_welfare_score / len(neighbors_nodes))
 
         if self.car_type == "Traditional":
 
             if self.inovator_type == "early adaptor":
-                if compare_welfare_score < self.welfare_score * (1 + self.early_adaptor_upper_threshold):
+                if self.welfare_score * (1 + self.early_adaptor_upper_threshold) > compare_welfare_score:
                     purchase_car(self)
 
             if self.inovator_type == "stagnator":
-                if self.welfare_score > compare_welfare_score * (1 + self.early_adaptor_lower_threshold):
+                if (compare_welfare_score / self.welfare_score) > self.early_adaptor_lower_threshold:
                     purchase_car(self)
 
             if self.inovator_type == "normal":

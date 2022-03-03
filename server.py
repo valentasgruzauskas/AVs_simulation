@@ -38,24 +38,30 @@ grid = NetworkModule(social_network, 750, 750, library="d3")
 # Define graphs
 Safety_chart = ChartModule([{"Label": "Total fines collected", "Color": "#FF0000"}])
 
-Enviroment_chart = ChartModule([{"Label": "Total CO2", "Color": "#FF0000"}])
+Enviroment_chart = ChartModule([{"Label": "Mean CO2", "Color": "#FF0000"}])
 
-Welfare_chart = ChartModule([{"Label": "Total welfare", "Color": "#FF0000"}])
+Welfare_chart = ChartModule([{"Label": "Mean welfare", "Color": "#FF0000"}])
 
-Savings_chart = ChartModule([{"Label": "Total savings", "Color": "#FF0000"}])
+Savings_chart = ChartModule([{"Label": "Mean savings", "Color": "#FF0000"}])
 
 Car_chart = ChartModule([{"Label": "Number of autonomous vehicles", "Color": "#FF0000"}])
 
-Early_adaptors_chart = ChartModule([{"Label": "Number of Early adaptors", "Color": "#FF0000"}])
+Early_adaptors_chart = ChartModule([{"Label": "Number of early adaptors", "Color": "#FF0000"}])
 
 Stagnators_chart = ChartModule([{"Label": "Number of stagnators", "Color": "#FF0000"}])
 
 Productivity_chart = ChartModule(
     [
-        {"Label": "Number of healthy households", "Color": "#FF0000"},
         {"Label": "Number of accident households", "Color": "#eb9534"},
         {"Label": "Number of injured households", "Color": "#fcf92d"},
         {"Label": "Number of dead households", "Color": "#2d79fc"},
+    ]
+)
+
+
+Healthy_households_chart = ChartModule(
+    [
+        {"Label": "Number of healthy households", "Color": "#FF0000"}
     ]
 )
 
@@ -73,10 +79,10 @@ model_params = {
         "slider", "Stagnator propability", value=0.05, min_value=0.01, max_value=0.1, step=0.01
     ),
     "early_adaptor_lower_threshold": UserSettableParameter(
-        "slider", "Early adaptor lower treshold", value=0.5, min_value=0.1, max_value=1, step=0.1
+        "slider", "Early adaptor lower treshold", value=1, min_value=0.1, max_value=5, step=0.1
     ),
     "early_adaptor_upper_threshold": UserSettableParameter(
-        "slider", "Early adaptor upper treshold", value=0.5, min_value=0.1, max_value=1, step=0.1
+        "slider", "Early adaptor upper treshold", value=1, min_value=0.1, max_value=5, step=0.1
     ),
     "selected_country": UserSettableParameter(
         "choice", "Select country", value="Lithuania", choices=["Germany", "Lithuania"]
@@ -96,6 +102,7 @@ server = ModularServer(
         Early_adaptors_chart,
         Stagnators_chart,
         Productivity_chart,
+        Healthy_households_chart
     ],
     "AVs market penetration",
     model_params,

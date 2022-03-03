@@ -10,9 +10,9 @@ from support_functions import (
     calculate_car_type,
     calculate_early_adaptors_type,
     calculate_stagnator_type,
-    calculcate_total_CO2,
-    calculcate_total_welfare,
-    calculcate_total_savings,
+    calculcate_mean_CO2,
+    calculcate_mean_welfare,
+    calculcate_mean_savings,
     calculate_productivity_healthy,
     calculate_productivity_accident,
     calculate_productivity_injured,
@@ -69,9 +69,9 @@ class welfare_model(Model):
             self.Injury_prob = get_input_value(self.input_data, "Inj_prob_LT")
             self.Fatality_prob = get_input_value(self.input_data, "Fat_prob_LT")
             self.single_person_prob = get_input_value(self.input_data, "SPH_ratio_LT")
-            self.W_SH_LT = get_input_value(self.input_data, "W_SH_LT")
-            self.W_CH_LT = get_input_value(self.input_data, "W_CH_LT")
-            self.Trans_exp_LT = get_input_value(self.input_data, "Trans_exp_LT")
+            self.W_SH = get_input_value(self.input_data, "W_SH_LT")
+            self.W_CH = get_input_value(self.input_data, "W_CH_LT")
+            self.Trans_exp = get_input_value(self.input_data, "Trans_exp_LT")
 
             self.fine_size = get_input_value(self.input_data, "Fine_size_LT")
             self.fine_prob = get_input_value(self.input_data, "Fine_prob_LT")
@@ -81,9 +81,9 @@ class welfare_model(Model):
             self.Injury_prob = get_input_value(self.input_data, "Inj_prob_DE")
             self.Fatality_prob = get_input_value(self.input_data, "Fat_prob_DE")
             self.single_person_prob = get_input_value(self.input_data, "SPH_ratio_DE")
-            self.W_SH_LT = get_input_value(self.input_data, "W_SH_DE")
-            self.W_CH_LT = get_input_value(self.input_data, "W_CH_DE")
-            self.Trans_exp_LT = get_input_value(self.input_data, "Trans_exp_DE")
+            self.W_SH = get_input_value(self.input_data, "W_SH_DE")
+            self.W_CH = get_input_value(self.input_data, "W_CH_DE")
+            self.Trans_exp = get_input_value(self.input_data, "Trans_exp_DE")
 
             self.fine_size = get_input_value(self.input_data, "Fine_size_DE")
             self.fine_prob = get_input_value(self.input_data, "Fine_prob_DE")
@@ -91,9 +91,9 @@ class welfare_model(Model):
         self.datacollector = DataCollector(
             model_reporters={
                 "Total fines collected": calculcate_total_fines_collected,
-                "Total CO2": calculcate_total_CO2,
-                "Total welfare": calculcate_total_welfare,
-                "Total savings": calculcate_total_savings,
+                "Mean CO2": calculcate_mean_CO2,
+                "Mean welfare": calculcate_mean_welfare,
+                "Mean savings": calculcate_mean_savings,
                 "Number of autonomous vehicles": calculate_car_type,
                 "Number of early adaptors": calculate_early_adaptors_type,
                 "Number of stagnators": calculate_stagnator_type,
@@ -119,7 +119,7 @@ class welfare_model(Model):
         for i, node in enumerate(self.G.nodes()):
             agents_H = Household_agent(
                 unique_id=i,
-                welfare_score=0,
+                welfare_score=1,
                 savings=0,
                 income=select_household_size(self),
                 inovator_type=select_inovator_type(self),

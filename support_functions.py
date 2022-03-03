@@ -1,6 +1,7 @@
 import pandas as pd
 import random
 import math
+import numpy as np
 
 
 def calculcate_total_fines_collected(welfare_model):
@@ -10,25 +11,25 @@ def calculcate_total_fines_collected(welfare_model):
     return total_fines
 
 
-def calculcate_total_CO2(welfare_model):
+def calculcate_mean_CO2(welfare_model):
     CO2 = [agent.CO2 for agent in welfare_model.schedule.agents]
-    Total_CO2 = sum(CO2)
+    mean_CO2 = int(np.mean(CO2))
 
-    return Total_CO2
+    return mean_CO2
 
 
-def calculcate_total_welfare(welfare_model):
+def calculcate_mean_welfare(welfare_model):
     welfare_score = [agent.welfare_score for agent in welfare_model.schedule.agents]
-    Total_welfare_score = sum(welfare_score)
+    mean_welfare_score = int(np.mean(welfare_score))
 
-    return Total_welfare_score
+    return mean_welfare_score
 
 
-def calculcate_total_savings(welfare_model):
+def calculcate_mean_savings(welfare_model):
     welfare_score = [agent.savings for agent in welfare_model.schedule.agents]
-    Total_savings = sum(welfare_score)
+    mean_savings = int(np.mean(welfare_score))
 
-    return Total_savings
+    return mean_savings
 
 
 def calculate_productivity_healthy(welfare_model):
@@ -106,13 +107,13 @@ def get_input_value(df, indicator_title):
     df = df.loc[df["Variable_sht"] == indicator_title]
     return float(df["Value"])
 
-
+#TO DO - nera germany
 def select_household_size(model):
 
     if random.uniform(0, 1) < model.single_person_prob:
-        income = model.W_SH_LT * model.Trans_exp_LT
+        income = model.W_SH
     else:
-        income = model.W_CH_LT * model.Trans_exp_LT
+        income = model.W_CH
 
     return income
 
