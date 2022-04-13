@@ -100,12 +100,7 @@ class Household_agent(Agent):
 
         if random.uniform(0, 1) < offense_prob:
 
-            offense_conducted = False
-
-            if random.uniform(0, 1) < offense_prob:
-                offense_conducted = True
-
-                self.fine_size = self.model.fine_size
+            self.fine_size = self.model.fine_size
 
     def update_savings(self):
 

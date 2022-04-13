@@ -73,16 +73,16 @@ model_params = {
         "slider", "Social network size", value=8, min_value=5, max_value=12, step=1
     ),
     "early_adaptor_prob": UserSettableParameter(
-        "slider", "Early adaptor propability", value=0.05, min_value=0.01, max_value=0.1, step=0.01
+        "slider", "Early adaptor propability", value=0, min_value=0, max_value=0.1, step=0.002
     ),
     "stagnator_prob": UserSettableParameter(
-        "slider", "Stagnator propability", value=0.05, min_value=0.01, max_value=0.1, step=0.01
+        "slider", "Stagnator propability", value=0.1, min_value=0, max_value=1, step=0.1
     ),
     "early_adaptor_lower_threshold": UserSettableParameter(
-        "slider", "Early adaptor lower treshold", value=1, min_value=0.1, max_value=5, step=0.1
+        "slider", "Early adaptor lower treshold", value=1, min_value=0, max_value=100, step=1
     ),
     "early_adaptor_upper_threshold": UserSettableParameter(
-        "slider", "Early adaptor upper treshold", value=1, min_value=0.1, max_value=5, step=0.1
+        "slider", "Early adaptor upper treshold", value=1, min_value=0, max_value=100, step=1
     ),
     "selected_country": UserSettableParameter(
         "choice", "Select country", value="Lithuania", choices=["Germany", "Lithuania"]

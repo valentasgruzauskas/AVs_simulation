@@ -1,4 +1,3 @@
-import pandas as pd
 import random
 import math
 import numpy as np
@@ -107,7 +106,6 @@ def get_input_value(df, indicator_title):
     df = df.loc[df["Variable_sht"] == indicator_title]
     return float(df["Value"])
 
-#TO DO - nera germany
 def select_household_size(model):
 
     if random.uniform(0, 1) < model.single_person_prob:
@@ -120,18 +118,18 @@ def select_household_size(model):
 
 def select_inovator_type(model):
 
-    inovator_type = 'normal'
-
     if random.uniform(0, 1) < model.stagnator_prob:
         inovator_type = "stagnator"
-
-    if random.uniform(0, 1) < model.early_adaptor_prob:
+    elif random.uniform(0, 1) < model.early_adaptor_prob:
         inovator_type = "early adaptor"
+    else:
+        inovator_type = "normal"
 
     return inovator_type
 
 
 def get_l5_costs(self):
+
     df = self.model.AV_costs
     current_month = self.model.month
     current_year = math.floor(current_month / 12)
