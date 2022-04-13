@@ -51,10 +51,10 @@ fixed_params = {"Number_households": Number_households}
 
 variable_parameters = {
     "Social_network_size": range(8, 13, 1),
-    "early_adaptor_prob": np.arange(0.1, 1, 0.2),
-    "stagnator_prob": np.arange(0, 1, 0.2),
-    "early_adaptor_lower_threshold": np.arange(1, 100, 10),
-    "early_adaptor_upper_threshold": np.arange(1, 100, 10),
+    "early_adaptor_prob": np.arange(0, 0.005, 0.001),
+    "stagnator_prob": np.arange(0, 0.2, 0.05),
+    "early_adaptor_lower_threshold": np.arange(1, 20, 2),
+    "early_adaptor_upper_threshold": np.arange(1, 5, 1),
     "selected_country": ["Lithuania", "Germany"],
 }
 

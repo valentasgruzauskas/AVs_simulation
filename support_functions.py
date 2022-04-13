@@ -92,7 +92,7 @@ def purchase_car(self):
 
     monthly_payment = int(loan_size / self.model.loan_period)
 
-    if self.savings > down_payment:
+    if self.savings > (down_payment + (monthly_payment * 6)):
 
         self.savings = self.savings - down_payment
 

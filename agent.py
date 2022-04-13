@@ -123,16 +123,20 @@ class Household_agent(Agent):
         # Pay fines
         self.savings = self.savings - self.fine_size
 
-        # Pay loan
-        if self.loan != 0:
-
-            if self.savings > self.monthly_payment:
-                self.loan = self.loan - self.monthly_payment
-                self.savings = self.savings - self.monthly_payment
-
         # Pay other expenditures
         other_expenses = self.income * (0.85 - self.model.Trans_exp) #basad on average saving ratio
         self.savings = self.savings - other_expenses
+
+        # Pay loan
+        if self.loan > 0:
+
+            if self.savings > self.monthly_payment:
+                if (self.loan - self.monthly_payment) < 0:
+                    self.savings = self.savings - self.loan
+                    self.loan = 0
+                else:
+                    self.loan = self.loan - self.monthly_payment
+                    self.savings = self.savings - self.monthly_payment
 
         return income
 
@@ -175,7 +179,7 @@ class Household_agent(Agent):
                     purchase_car(self)
 
             if self.inovator_type == "normal":
-                if self.welfare_score > compare_welfare_score:
+                if (compare_welfare_score / self.welfare_score) > (self.early_adaptor_lower_threshold * 0.2):
                     purchase_car(self)
 
     def get_agent_month(self):
