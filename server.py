@@ -79,10 +79,10 @@ model_params = {
         "slider", "Stagnator propability", value=0.1, min_value=0, max_value=1, step=0.1
     ),
     "early_adaptor_lower_threshold": UserSettableParameter(
-        "slider", "Early adaptor lower treshold", value=20, min_value=0, max_value=100, step=1
+        "slider", "Lower welfare treshold coeficent", value=20, min_value=0, max_value=100, step=1
     ),
     "early_adaptor_upper_threshold": UserSettableParameter(
-        "slider", "Early adaptor upper treshold", value=5, min_value=0, max_value=100, step=1
+        "slider", "Upper welfare treshold coeficent", value=5, min_value=0, max_value=100, step=1
     ),
     "selected_country": UserSettableParameter(
         "choice", "Select country", value="Lithuania", choices=["Germany", "Lithuania"]
