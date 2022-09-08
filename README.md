@@ -75,3 +75,10 @@ Install packages: pip install -r requirements.txt
 ```
 CC BY-NC 3.0
 ```
+
+# Publication access & citation
+```
+Saulius Baskutis, Valentas Gružauskas, Peter Leibl, Linas Obcarskas, Agent-based modelling approach for autonomous vehicle influence on countries’ welfare, Journal of Cleaner Production, 2022, 134008, ISSN 0959-6526, https://doi.org/10.1016/j.jclepro.2022.134008.
+
+https://www.sciencedirect.com/science/article/pii/S0959652622035806
+```
